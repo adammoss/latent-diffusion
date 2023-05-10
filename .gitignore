@@ -133,4 +133,5 @@ data/*.npy
 wandb/
 taming/
 src/
+logs/
 

@@ -10,6 +10,7 @@ model:
         disc_start: 50001
         kl_weight: 0.000001
         disc_weight: 0.5
+        disc_in_channels: 1
 
     ddconfig:
       double_z: True
@@ -31,12 +32,14 @@ data:
     wrap: True
     train:
       target: ldm.data.cmd.CMDTrain
-      size: 256
-      dataset_name: [Mtot_Nbody_SIMBA]
+      params:
+        size: 64
+        datasets: [Mtot_Nbody_SIMBA]
     validation:
       target: ldm.data.cmd.CMDValidation
-      size: 256
-      dataset_name: [Mtot_Nbody_SIMBA]
+      params:
+        size: 64
+        datasets: [Mtot_Nbody_SIMBA]
 
 lightning:
   callbacks:
