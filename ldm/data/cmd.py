@@ -32,13 +32,16 @@ class CMDBase(Dataset):
     def __getitem__(self, i):
         return self.data[i]
 
-    def _load(self, size=None, norm_max=1.0, norm_min=-1.0, test_size=0.2, datasets=[], transform=np.log):
+    def _load(self, data_size=None, size=None, norm_max=1.0, norm_min=-1.0,
+              test_size=0.2, datasets=[], transform=np.log):
         data = []
         for i, dataset_name in enumerate(datasets):
             if not os.path.isfile(os.path.join(self.cache_dir, 'Maps_%s_LH_z=0.00.npy' % dataset_name)):
                 url = self.BASE_URL % dataset_name
                 download(url, os.path.join(self.cache_dir, "Maps_%s_LH_z=0.00.npy" % dataset_name))
             X = np.load(os.path.join(self.cache_dir, 'Maps_%s_LH_z=0.00.npy' % dataset_name)).astype(np.float32)
+            if data_size is not None:
+                X = X[0:data_size]
             if size is not None:
                 X = np.array([resize(img, (size, size)) for img in X])
             X = transform(X)
@@ -48,7 +51,7 @@ class CMDBase(Dataset):
             X = (norm_max - norm_min) * X + norm_min
             X = np.expand_dims(X, -1)
             for j in range(len(X)):
-                data.append({"image": X[j], "label": j})
+                data.append({"image": X[j], "label": i})
         self.data_train, self.data_test = train_test_split(data, test_size=test_size, random_state=42)
 
 
