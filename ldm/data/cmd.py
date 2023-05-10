@@ -27,7 +27,7 @@ class CMDBase(Dataset):
     def __getitem__(self, i):
         return self.data[i]
 
-    def _load(self, size=None, norm_max=1.0, norm_min=-1.0, test_size=0.2, datasets=[]):
+    def _load(self, size=None, norm_max=1.0, norm_min=-1.0, test_size=0.2, datasets=[], transform=np.log):
         data = []
         for i, dataset_name in enumerate(datasets):
             if not os.path.isfile(os.path.join(self.cache_dir, 'Maps_%s_LH_z=0.00.npy' % dataset_name)):
@@ -38,7 +38,7 @@ class CMDBase(Dataset):
             X = np.load(os.path.join(self.cache_dir, 'Maps_%s_LH_z=0.00.npy' % dataset_name)).astype(np.float32)
             if size is not None:
                 X = np.array([resize(img, (size, size)) for img in X])
-            X = np.log(X)
+            X = transform(X)
             minimum = np.min(X, axis=0)
             maximum = np.max(X, axis=0)
             X = (X - minimum) / (maximum - minimum)
