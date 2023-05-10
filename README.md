@@ -1,6 +1,20 @@
 # Latent Diffusion Models
 [arXiv](https://arxiv.org/abs/2112.10752) | [BibTeX](#bibtex)
 
+### Modified to use CMD data
+
+KL-f2 model on SIMBA and IllustrisTNG Nbody data (128x128x3 latents, 13.3M params)
+
+```
+python main.py --base configs/autoencoder/cmd_f2_med.yaml --train --gpus=0,
+```
+
+KL-f4 model on SIMBA and IllustrisTNG Nbody data (64x64x3 latents,  params)
+
+```
+python main.py --base configs/autoencoder/cmd_f4_med.yaml --train --gpus=0,
+```
+
 <p align="center">
 <img src=assets/results.gif />
 </p>

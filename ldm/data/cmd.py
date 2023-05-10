@@ -12,8 +12,13 @@ from sklearn.model_selection import train_test_split
 from skimage.transform import resize
 import urllib
 
+from taming.util import download
+
 
 class CMDBase(Dataset):
+
+    BASE_URL = "https://users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/Maps_%s_LH_z=0.00.npy"
+
     def __init__(self, config=None, size=None, datasets=[]):
         self.config = config or OmegaConf.create()
         if not type(self.config) == dict:
@@ -31,10 +36,8 @@ class CMDBase(Dataset):
         data = []
         for i, dataset_name in enumerate(datasets):
             if not os.path.isfile(os.path.join(self.cache_dir, 'Maps_%s_LH_z=0.00.npy' % dataset_name)):
-                url = "https://users.flatironinstitute.org/~fvillaescusa/priv/DEPnzxoWlaTQ6CjrXqsm0vYi8L7Jy/CMD/2D_maps/data/Maps_%s_LH_z=0.00.npy" % dataset_name
-                print("Downloading %s" % url)
-                urllib.request.urlretrieve(url, os.path.join(self.cache_dir, "Maps_%s_LH_z=0.00.npy" % dataset_name))
-                print("Finished download")
+                url = self.BASE_URL % dataset_name
+                download(url, os.path.join(self.cache_dir, "Maps_%s_LH_z=0.00.npy" % dataset_name))
             X = np.load(os.path.join(self.cache_dir, 'Maps_%s_LH_z=0.00.npy' % dataset_name)).astype(np.float32)
             if size is not None:
                 X = np.array([resize(img, (size, size)) for img in X])
