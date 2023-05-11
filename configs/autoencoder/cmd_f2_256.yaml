@@ -28,7 +28,7 @@ model:
 data:
   target: main.DataModuleFromConfig
   params:
-    batch_size: 12
+    batch_size: 4
     wrap: True
     train:
       target: ldm.data.cmd.CMDTrain
@@ -52,4 +52,4 @@ lightning:
 
   trainer:
     benchmark: True
-    accumulate_grad_batches: 2
+    accumulate_grad_batches: 6
