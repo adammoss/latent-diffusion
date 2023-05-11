@@ -1,19 +1,30 @@
+### Training autoencoder models on CMD data
+
+KL-f2 model on SIMBA and IllustrisTNG N-body 128x128x1 data (64x64x3 latents, 13.3M params)
+
+```
+python main.py --base configs/autoencoder/cmd_f2_128.yaml --train --gpus=0,
+```
+
+KL-f4 model on SIMBA and IllustrisTNG N-body 128x128x1 data (32x32x3 latents, 45.3M params)
+
+```
+python main.py --base configs/autoencoder/cmd_f4_128.yaml --train --gpus=0,
+```
+
+All models were trained until convergence (no further substantial improvement in validation reconstruction loss).
+
+| Model    | Data size | Fields | rec loss vs val | train steps | Link                                                                                                                                         | Comments              
+|----------|-----------|--------|-----------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
+| f=2, KL   | 128x128x1 |  Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG      | 0.01279         | 47999       |      https://huggingface.co/adammoss/cmd_f2_128                             |                       |
+| f=2, KL | 256x256x1 |   Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG     | 0.0             | 0           |                                     |                       |
+| f=4, KL | 128x128x1 |    Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG    | 0.0             | 0           |                                     |                       |
+ | f=4, KL | 256x256x1 |   Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG     | 0.0             | 0           |                                     |                       |
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1pU28rH13odej5ywSiTn67gd0zCYNyjYd?usp=sharing]
+
 # Latent Diffusion Models
 [arXiv](https://arxiv.org/abs/2112.10752) | [BibTeX](#bibtex)
-
-### Modified to use CMD data
-
-KL-f2 model on SIMBA and IllustrisTNG Nbody data (128x128x3 latents, 13.3M params)
-
-```
-python main.py --base configs/autoencoder/cmd_f2_med.yaml --train --gpus=0,
-```
-
-KL-f4 model on SIMBA and IllustrisTNG Nbody data (64x64x3 latents,  params)
-
-```
-python main.py --base configs/autoencoder/cmd_f4_med.yaml --train --gpus=0,
-```
 
 <p align="center">
 <img src=assets/results.gif />
