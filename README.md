@@ -1,4 +1,4 @@
-### Training autoencoder models on CMD data
+## Training autoencoder models on CMD data
 
 KL-f2 model on SIMBA and IllustrisTNG N-body 128x128x1 data (64x64x3 latents, 13.3M params)
 
