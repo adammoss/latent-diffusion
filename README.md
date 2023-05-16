@@ -14,12 +14,12 @@ python main.py --base configs/autoencoder/cmd_f4_128.yaml --train --gpus=0,
 
 All models were trained until convergence (no further substantial improvement in validation reconstruction loss).
 
-| Model         | Data size | Fields | rec loss vs val | train steps | Link                                                                                                                                         | Comments              
-|---------------|-----------|--------|-----------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
-| f=2, KL (d=3) | 128x128x1 |  Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG      | 0.01279         | 47999       |      https://huggingface.co/adammoss/cmd_f2_128                             |                       |
-| f=2, KL (d=3) | 256x256x1 |   Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG     | 0.0             | 0           |                                     |                       |
-| f=4, KL (d=8) | 128x128x1 |    Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG    | 0.0             | 0           |                                     |                       |
- | f=4, KL       | 256x256x1 |  <br/> Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG     | 0.0             | 0           |                                     |                       |
+| Model         | Data size | Train Fields                                                             | Validation Fields | Validation L1 Loss | Link                                               | Comments                      
+|---------------|-----------|--------------------------------------------------------------------------|-------------------|--------------------|----------------------------------------------------|-------------------------------|
+| f=2, KL (d=3) | 128x128x1 | Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG                                | Same              | 0.008              | https://huggingface.co/adammoss/cmd_f2_d3_128      | 0.015 L1 loss validated on Mgas |
+| f=2, KL (d=3) | 128x128x1 | Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG, Mgas_SIMBA, Mgas_IllustrisTNG | Same              | 0.                 | https://huggingface.co/adammoss/cmd_f2_d3_128_full |  |
+| f=2, KL (d=3) | 256x256x1 | Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG                                | Same              | 0.007              | https://huggingface.co/adammoss/cmd_f2_d3_256      |                               |
+| f=4, KL (d=8) | 128x128x1 | Mtot_Nbody_SIMBA, Mtot_Nbody_IllustrisTNG                                | Same              | 0.017              | https://huggingface.co/adammoss/cmd_f4_d8_128      |                               |
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1pU28rH13odej5ywSiTn67gd0zCYNyjYd?usp=sharing]
 
