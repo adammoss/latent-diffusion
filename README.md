@@ -3,13 +3,13 @@
 KL-f2 model on SIMBA and IllustrisTNG N-body 128x128x1 data (64x64x3 latents, 13.3M params)
 
 ```
-python main.py --base configs/autoencoder/cmd_f2_128.yaml --train --gpus=0,
+python main.py --base configs/autoencoder/cmd_f2_d3_128.yaml --train --gpus=0,
 ```
 
-KL-f4 model on SIMBA and IllustrisTNG N-body 128x128x1 data (32x32x3 latents, 45.3M params)
+KL-f4 model on SIMBA and IllustrisTNG N-body 128x128x1 data (32x32x8 latents, 45.3M params)
 
 ```
-python main.py --base configs/autoencoder/cmd_f4_128.yaml --train --gpus=0,
+python main.py --base configs/autoencoder/cmd_f4_d8_128.yaml --train --gpus=0,
 ```
 
 All models were trained until convergence (no further substantial improvement in validation reconstruction loss).
